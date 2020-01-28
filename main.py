@@ -16,11 +16,18 @@ class MainApplication(object):
         # print(self._csv_path)
         # print(self._json_path)
 
-        self._db_man = db.DbManager(db_path=self._db_path, echo=True)
+        self._db_man = db.DbManager(db_path=self._db_path, echo=False)
+
+    def _print_db(self):
+        for candidate in self._db_man.dump_all():
+            for score in candidate.scores:
+                print("# ref: %s, name: %s, score: %s" % (candidate.candidate_ref, candidate.name, score.score))
 
     def main(self):
         utility.fill_from_csv(self._db_man, self._csv_path)
         utility.dump_csv_from_json(self._json_path, self._csv_new_path)
+
+        self._print_db()
 
 
 def main():

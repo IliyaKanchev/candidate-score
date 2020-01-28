@@ -39,6 +39,16 @@ class DbManager(object):
     def search_candidate(self, candidate_ref):
         return self._session.query(Candidate).filter(Candidate.candidate_ref == candidate_ref).all()
 
+        # candidates = []
+        #
+        # for c, s in self._session.query(Candidate, Score).filter(Candidate.candidate_ref == candidate_ref).all():
+        #     candidates.append(c)
+        #
+        # return candidates
+
+    def dump_all(self):
+        return self._session.query(Candidate).all()
+
     def add_candidate(self, candidate_ref, name):
         candidate = Candidate(candidate_ref=str(candidate_ref), name=str(name))
         self._session.add(candidate)
