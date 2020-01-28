@@ -1,5 +1,6 @@
 
 import csv
+import json
 
 
 def fill_from_csv(db_man, csv_path):
@@ -32,4 +33,7 @@ def fill_from_csv(db_man, csv_path):
 
 
 def dump_csv_from_json(json_path, csv_path):
-    pass
+    with open(json_path, mode='r') as json_file:
+        json_object = json.load(json_file)
+
+    print(json_object)

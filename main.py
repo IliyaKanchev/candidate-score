@@ -9,7 +9,8 @@ class MainApplication(object):
     def __init__(self):
         self._db_path = os.path.join(os.path.dirname(__file__), "db.sql")
         self._csv_path = os.path.join(os.path.dirname(__file__), "data", "candidates.csv")
-        self._json_path = os.path.join(os.path.dirname(__file__), "data", "candidates-new.json")
+        self._json_path = os.path.join(os.path.dirname(__file__), "data", "candidates.json")
+        self._csv_new_path = os.path.join(os.path.dirname(__file__), "data", "candidates-new.csv")
 
         # print(self._db_path)
         # print(self._csv_path)
@@ -19,7 +20,7 @@ class MainApplication(object):
 
     def main(self):
         utility.fill_from_csv(self._db_man, self._csv_path)
-        utility.dump_csv_from_json(self._json_path, self._csv_path)
+        utility.dump_csv_from_json(self._json_path, self._csv_new_path)
 
 
 def main():
