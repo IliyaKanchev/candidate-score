@@ -2,6 +2,7 @@
 import os
 
 from libs import db
+from libs import view
 from libs import utility
 
 
@@ -17,6 +18,7 @@ class MainApplication(object):
         # print(self._json_path)
 
         self._db_man = db.DbManager(db_path=self._db_path, echo=False)
+        self._view = view.View(self._db_man)
 
     def _print_db(self):
         for candidate in self._db_man.dump_all():
@@ -26,6 +28,11 @@ class MainApplication(object):
     def main(self):
         utility.fill_from_csv(self._db_man, self._csv_path)
         utility.dump_csv_from_json(self._json_path, self._csv_new_path)
+
+        try:
+            self._view.serv()
+        except KeyboardInterrupt:
+            pass
 
         self._print_db()
 

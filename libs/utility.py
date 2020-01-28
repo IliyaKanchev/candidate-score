@@ -14,17 +14,17 @@ def fill_from_csv(db_man, csv_path):
             if line_count == 0:
                 continue
 
-            existing = db_man.search_candidate(row["candidate_ref"])
-
-            if existing:
-                candidate = existing[0]
-
-            else:
-                candidate = db_man.add_candidate(row["candidate_ref"], row["name"])
-
-            # print(candidate.scores)
-
             if 0.0 <= float(row["score"]) <= 100.0:
+                existing = db_man.search_candidate(row["candidate_ref"])
+
+                if existing:
+                    candidate = existing[0]
+
+                else:
+                    candidate = db_man.add_candidate(row["candidate_ref"], row["name"])
+
+                # print(candidate.scores)
+
                 db_man.add_score(candidate, row["score"])
 
             # print(candidate.scores)
