@@ -13,7 +13,7 @@ class Score(Base):
     candidate_ref = sqlalchemy.Column(sqlalchemy.String, sqlalchemy.ForeignKey('candidates.candidate_ref'))
     score = sqlalchemy.Column(sqlalchemy.Float)
 
-    user = orm.relationship("Candidate", back_populates="scores")
+    candidate = orm.relationship("Candidate", back_populates="scores")
 
 
 class Candidate(Base):
@@ -22,19 +22,31 @@ class Candidate(Base):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
     name = sqlalchemy.Column(sqlalchemy.String)
     candidate_ref = sqlalchemy.Column(sqlalchemy.String)
-    scores = orm.relation("Score", back_populates="candidates")
+
+    scores = orm.relation("Score", back_populates="candidate")
 
 
 class DbManager(object):
-    def __init__(self, db_path="/:memory:", echo=False):
+    def __init__(self, db_path=":memory:", echo=False):
         self._engine = sqlalchemy.create_engine('sqlite:///%s' % db_path, echo=echo)
-        self._session = orm.sessionmaker(bind=self._engine)
+        self._session = orm.Session(bind=self._engine)
 
         Base.metadata.create_all(self._engine)
 
     def commit(self):
         self._session.commit()
 
-    def insert(self, candidate):
+    def search_candidate(self, candidate_ref):
+        return self._session.query(Candidate).filter(Candidate.candidate_ref == candidate_ref).all()
+
+    def add_candidate(self, candidate_ref, name):
+        candidate = Candidate(candidate_ref=str(candidate_ref), name=str(name))
         self._session.add(candidate)
-        self.commit()
+
+        return candidate
+
+    def add_score(self, candidate, score_val):
+        score = Score(candidate_ref=str(candidate.candidate_ref), score=float(score_val))
+        candidate.scores.append(score)
+
+        return score
