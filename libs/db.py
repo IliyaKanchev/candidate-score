@@ -27,5 +27,11 @@ class Candidate(Base):
 
 class DbManager(object):
     def __init__(self):
-        pass
+        self._engine = sqlalchemy.create_engine('sqlite:///:memory:', echo=True)
+        self._session = orm.sessionmaker(bind=self._engine)
 
+        Base.metadata.create_all(self._engine)
+
+    def insert(self, candidate):
+        self._session.add(candidate)
+        self._session.commit()
