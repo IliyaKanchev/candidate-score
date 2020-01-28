@@ -16,8 +16,15 @@ class View(object):
     def _candidates(self):
         rows = ["<ul>"]
 
+        best = self._db_man.get_best_candidate()
+
         for candidate in self._db_man.dump_all(True):
-            rows.append("<li>%s" % candidate.name)
+            if best[0].candidate_ref == candidate.candidate_ref:
+                rows.append("<li style='background-color: #2EA620;'>%s" % candidate.name)
+
+            else:
+                rows.append("<li>%s" % candidate.name)
+
             rows.append("<ul>")
 
             for score in sorted(candidate.scores, key=lambda x: x.score):

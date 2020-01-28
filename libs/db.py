@@ -50,6 +50,14 @@ class DbManager(object):
         return self._session.query(Candidate).order_by(Candidate.name).all()\
             if order_by_name else self._session.query(Candidate).all()
 
+    def get_best_candidate(self):
+        scores = self._session.query(Score, sqlalchemy.func.max(Score.score)).all()
+
+        if scores:
+            return self.search_candidate(scores[0][0].candidate_ref)
+
+        return []
+
     def add_candidate(self, candidate_ref, name):
         candidate = Candidate(candidate_ref=str(candidate_ref), name=str(name))
         self._session.add(candidate)
