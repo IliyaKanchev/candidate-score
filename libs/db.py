@@ -32,6 +32,9 @@ class DbManager(object):
 
         Base.metadata.create_all(self._engine)
 
+    def commit(self):
+        self._session.commit()
+
     def insert(self, candidate):
         self._session.add(candidate)
-        self._session.commit()
+        self.commit()
