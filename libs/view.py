@@ -3,8 +3,10 @@ import flask
 
 
 class View(object):
-    def __init__(self, db_man):
+    def __init__(self, db_man, debug=False):
         self._db_man = db_man
+        self._debug = debug
+
         self._app = flask.Flask(__name__)
 
         self._app.add_url_rule('/', 'index', view_func=self._index)
@@ -40,4 +42,4 @@ class View(object):
         return "".join(rows)
 
     def serv(self):
-        self._app.run(debug=True)
+        self._app.run(debug=self._debug)

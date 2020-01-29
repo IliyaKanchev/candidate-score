@@ -7,6 +7,7 @@ This programming exercise is designed to take 60-120 minutes. The aim is
 to demonstrate programming approach as a priority over finishing it!
 Either email back a zipped project folder containing your source files,
 or a link to a git repository containing your work.
+
 The Task
 --------
 You will create a small Python 3 web app backed by a sqlite database
@@ -33,9 +34,10 @@ is allowed to take the test multiple times.
 STEP 2
 ------
 Write the code to generate the database tables in an sqlite db
-corresponding to the models created STEP 1.STEP 3
-------
+corresponding to the models created STEP 1.
 
+STEP 3
+------
 Write a python utility module containing two functions which will:
 
 a) Read a CSV file such as the attached (candidates.csv) into to the
@@ -48,7 +50,6 @@ like the attached (candidates.csv) with candidates ordered by score.
 
 STEP 4
 ------
-
 If you have time...
 Create a view which will display an HTML page at path "/candidates" with
 an html table containing:
