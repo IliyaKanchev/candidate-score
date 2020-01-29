@@ -14,7 +14,7 @@ def fill_from_csv(db_man, csv_path):
             if line_count == 0:
                 continue
 
-            if 0.0 <= float(row["score"]) <= 100.0:
+            if 0.0 <= float(row["score"]) <= 100.0 and len(row["candidate_ref"]) == 8:
                 existing = db_man.search_candidate(row["candidate_ref"])
 
                 if existing:
