@@ -51,6 +51,7 @@ like the attached (candidates.csv) with candidates ordered by score.
 STEP 4
 ------
 If you have time...
+
 Create a view which will display an HTML page at path "/candidates" with
 an html table containing:
 
