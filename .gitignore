@@ -294,4 +294,3 @@ dmypy.json
 # End of https://www.gitignore.io/api/python,pycharm+all,visualstudiocode,openframeworks+visualstudio
 
 db.sql
-data/candidates-new.csv
