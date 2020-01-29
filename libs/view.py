@@ -9,11 +9,7 @@ class View(object):
 
         self._app = flask.Flask(__name__)
 
-        self._app.add_url_rule('/', 'index', view_func=self._index)
         self._app.add_url_rule('/candidates', 'candidates', view_func=self._candidates)
-
-    def _index(self):
-        return "Hello, World!"
 
     def _candidates(self):
         rows = ["<ul>"]
