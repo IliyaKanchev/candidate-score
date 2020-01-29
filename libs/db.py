@@ -28,7 +28,7 @@ class Candidate(Base):
 
 class DbManager(object):
     def __init__(self, db_path=":memory:", echo=False):
-        self._engine = sqlalchemy.create_engine('sqlite:///%s' % db_path, echo=echo)
+        self._engine = sqlalchemy.create_engine('sqlite:///%s?check_same_thread=False' % db_path, echo=echo)
         self._session = orm.Session(bind=self._engine)
 
         Base.metadata.create_all(self._engine)
